@@ -1,0 +1,179 @@
+ 
+-----------------------------------------------------------------------------------------------------------
+
+MaisonetteScript (MS) is not a real programming language.
+
+It's just a simple markup script.
+
+A MaisonetteScript script is a text string.
+
+It gets converted to a nested structure Maisonette can use.
+
+- a MS script gets always converted to a collection of Maisonette pages
+
+-> these pages can then be put into the state of the Maisonette page, overwriting
+existing pages, or adding to those or whatever
+
+input: MS code as string
+
+output: object with
+  key: user given page id!!!!
+  value: page object
+
+-----------------------------------------------------------------------------------------------------------
+
+MaisonetteScript can only be successfully used if the user uses stable page ids.
+
+The user has to give sensible ids to the pages and use those in the MaisonetteScript scripts.
+
+If they change a page id, the MS scripts DO NOT auto-update. (They might try, though,
+it wouldn't be a 100% unfeasible, would it?).
+
+-----------------------------------------------------------------------------------------------------------
+
+MS script is just another representation of the page structure we already have, with the only
+difference that goto and links will use user-given ids instead of internal ids,
+and that images will use user-given names instead of an object containing the actual 
+raw image data, etc. ... (or an internal asset id, I don't now how images really work right now?)
+
+That's basically a conversion that has to take place.
+
+-----------------------------------------------------------------------------------------------------------
+
+Note: when switching link type in the editor, if there is already a sub-command-block with content,
+we should warn that it will be deleted, then user can choose to delete it or to abort action.
+(or: warn that it has been deleted, then say that they can use "undo"). Hidden sub-command-blocks
+with content are stupid, set false user expectations that everything is kept, etc. ...
+
+-----------------------------------------------------------------------------------------------------------
+
+MS script rules:
+
+
+=== page_name
+
++ choice text -> page_target_user_id
+
++ choice text
+  (a choice than has no goto target, that enters a subcommandblock, instead)
+
++ choice text -> gather
+  (a choice that has no goto target and no subcommandblock, just jumps to next gather.
+  This is to keep compatibility with the Maisonette editor.)
+
+-
+  (a gather, no text on same line allowed)
+
+++ -- etc. self-explanatory, like Ink
+
+-> page_target_user_id
+  goto. must be first entry on line
+  (unless it's part of a goto choice, see above, but that's not a goto command per se, just
+  a part of the choice)
+  There are currently no labels, so you can only go to a page.
+  Maybe in the future there will be labels. The problem is that they obfuscate the structure, make
+  the nested click to uncollapse etc. structure even more useless. But fine, I guess
+  advanced users who mess around with labels a lot will use text mode anyway.
+  So that's definitely an addition to add some day, but then of course we also need to adapt the goto command
+  to do that. There can be no features supported by MS that the GUI editor does not support, because
+  we always need to be able to switch back and forth between the two representations and
+  edit them separately.
+
+# command_name: command_content
+a command.
+command content varies by type of command
+
+examples:
+
+# set: x = 4 + 6
+
+# image: my-castle, classes: centered, rounded, big, custom-3
+
+Raw text: text command, consecutive lines are pulled together into one text command.
+
+
+if conditions:
+each command can have an if-condition. choices can have, too (not yet implemented, neither
+for GUI, nor runtime, but it should/will be)
+
+Each condition must follow on previous!!! line (no whitespace lines in between)
+
+if: y == 4 and 5 == 6 - 1
+# set: x = 4 + 6
+
+if: y == 4 and 5 == 6 - 1
++ goto bla -> bla
+
+if: y == 4 and 5 == 6 - 1
+-> blablu
+
+No endif, if only governs one line, always. This is in line with the editor.
+
+BUT: an if before a text block should govern the entire text block!
+
+Crazily, that's actually all we need!
+
+With these features we can represent every page state as a simple script.
+
+
+I really like this.
+
+Now we just need a siple, stupid processor
+to convert MS to a structure Maisonette editor understands.
+
+Not a real parser, just a simple, stupid processor will do.
+
+The hardest part is probably lumping the text blocks together.
+
+And if we want to got wild, we could keep the whitespace lines.
+Nah. Let's not overcomplicate things.
+
+
+a) read lines
+
+b) Split into chunks (if conditions, text blocks)
+
+c) build structure from chunks
+
+d) bring structure into a form the editor likes
+
+mabye do c) and d) together, if feasible
+
+
+
+The last problem is this: what if we allow if conditions inside a text block in the future?
+
+with double brackets etc.
+
+These should probably be processed separately, or even at runtime!
+
+Parsing that is a job of its own, because it involves nested structures, spanning
+multiple lines, escape characters maybe etc.
+
+The problem is that comands like the above
+would not be allowed inside a string etc. then. but I think
+that's feasible, especially if we need syntax highlighting which should make this
+clear.
+
+We don't have to strive for a logical programming language, just for a usable tool.
+
+Alternatively, we could already process brackets inside text blocks.
+
+The biggest problem, as always, is JS really.
+
+Maybe we only allow JS as command, but never inside a text block. That makes actually sense!
+
+Sounds good!
+
+
+Instead of sucky-ass square brackets, we use double brackets for text commands.
+
+No, wait. We can support both, since even inside the editor, the user types them!
+
+Nice!
+
+
+Okay, this is rad.
+
+Let's do this.
+

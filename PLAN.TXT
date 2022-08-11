@@ -1,0 +1,50 @@
+
+knot:
+  1 knot header
+  1 command block
+
+command block:
+  1 command sequence
+  from 0 to 1 link section
+  from 0 to 1 gather
+
+command section:
+  from 0 to n commands
+
+link section:
+  from 0 to n links
+
+
+
+gather:
+  1 gather head
+  from 0 to 1 command block
+
+link:
+  link proper
+  subordinate command block
+
+
+
+
+
+SIMPLIFIED:
+
+
+knot:
+  1 knot header
+  1 command block
+
+command block:
+  from 0 to n commands
+  from 0 to n links
+  from 0 to 1 gather
+
+gather:
+  1 gather head
+  1 command block
+
+link:
+  1 link proper
+  1 subordinate command block
+

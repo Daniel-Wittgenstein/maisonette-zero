@@ -1,0 +1,116 @@
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+body, html {
+  overflow-y: hidden;
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 12px;
+}
+
+code {
+  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
+    monospace;
+}
+
+
+.anim-uncollapse {
+  animation-name: animcoll;
+  animation-duration: 0.5s;
+  animation-fill-mode: forwards;
+}
+
+@keyframes animcoll {
+  from {opacity: 0.0}
+  to {opacity: 1.0}
+}
+
+
+  /* firefox: */
+  /*
+  disabled
+  * {
+    scrollbar-color: var(--scroll-bar-fg) var(--scroll-bar-bg);
+  } */
+  
+    /* webkit browsers:
+    just setting the background and foreground color on Chrome is meh,
+    so we set the width, too
+    */
+
+
+
+::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+  border-radius: 10px;
+}
+
+
+::-webkit-scrollbar-track {
+    background: #DDD;
+    border-radius: 10px;
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+::-webkit-scrollbar-thumb {
+    background: #818d92;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    background-clip: content-box;
+    box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #848b8d;
+}
+
+
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+
+
+
+.dark-scrollbars::-webkit-scrollbar {
+  width: 12px;
+  height: 12px;
+}
+
+
+.dark-scrollbars::-webkit-scrollbar-track {
+  background: rgb(13, 4, 56);
+}
+
+.dark-scrollbars::-webkit-scrollbar-thumb {
+  background: #818d92;
+  border: 0px solid #818d92;
+  background-clip: content-box;
+}
+
+.dark-scrollbars::-webkit-scrollbar-thumb:hover {
+  background: rgb(168, 168, 168);
+}
+
+.dark-scrollbars::-webkit-scrollbar-corner {
+  background: rgb(55, 65, 81);
+}
+
+div.dark-scrollbars {
+  background:  rgb(55, 65, 81);
+
+}

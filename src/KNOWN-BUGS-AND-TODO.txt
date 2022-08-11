@@ -1,0 +1,121 @@
+
+
+############################
+BUGS:
+
+- undoing works for text choice input text text input and if inputs but is never
+  reflected in ui
+
+- do nothing (continue to next gather) choices are broken in player.
+
+- Hitting tab inside the play view, hides the menu bar, rendering the app unusable.
+
+
+- not really a bug (yet), but inside
+  StoryNetView.js, search for this line:
+      Object.values(state.pages).forEach(page => {
+        and read the comment above it. This might (maybe?) lead to bugs if not fixed to use hooks(?)
+
+
+- arrows not rendered if linked from gather. fix. or ... after page restart they are rendered
+  but otherwise not? investigate.
+
+-reset mouse cursor on page open
+
+- undo sometimes still shows old stream content? maybe some load interference?
+
+- second identical image on page is NOT RENDERED??????! IT'S there, but somehow empty????
+
+
+###########################
+
+priority VERY HIGH todo:
+
+  - if conditions and variables inside story -> implement
+
+  - runtime story: fix gather (throws errors sometimes and sometimes just doesn't gather)
+      gathers work tentatively now, but have to be thouroughly tested with subpaths of subpaths, choices
+      that do nothing etc.
+
+  - runtime story: fix undo (has bugs)
+
+  - fix page open/close bugs, page delete bugs (might be new, regression? was this a localstorage
+  bug? weird. or a load/save bug. test load/save more)
+
+
+priority HIGH:
+
+  - if conditions for choices! (including equivalent ink export)
+
+  - test with huge stories
+
+  - manually test user interface for pain points, especially nested choices
+
+
+priority PRETTY HIGH:
+
+  - fix canvas story view bugs (expecially the one where thousand pages are created all of a sudden)
+
+
+priority MEDIUM LOW:
+  - status bar (inside story)
+
+
+PRIORITY LOW:
+  - assets (audio)
+  - UI IMPROVEMENTS / CHANGES:
+    - split up the story view into individual windows/panels/whatever
+    - persistent decollapsing of choices
+    - maybe: hot reload / playing pane on right hand side (probably lots of work)
+        -> all radical UI CHANGES: not before the user ui has been tested
+
+    - test page buttons with icons to test if interface becomes cleaner / if it achieves better usabiliy
+
+PRIORITY VERY LOW:
+  - timers
+  - increase canvas size optionally
+  - restart button on story end
+  
+##################################
+
+
+
+done:
+  - reload / save / undo (inside story)
+  - assets (images)
+  - fade transition
+  - write meta data to html including title 
+  - fix ink export: $variables should be converted to _variables and disallow vars starting with underscore
+  - save story as json / load story as json (essential, goes without saying)
+  - added icons for storynetview buttons
+  - basic end story command
+  - basic move command up and down
+
+##################################
+
+CODE SNIPPETS:
+
+    perfect FOR READING JSON: is it though?
+  function fileInputOnChange(ev) {
+    console.log(ev, fileInput.current,)
+    if (!fileInput.current.files) return
+    let file =  fileInput.current.files[0]
+    if (!file) return
+
+    let reader = new FileReader()
+
+    reader.onload = function (evt) {
+      let content = evt.target.result
+      loadContent(content)
+      fileInput.current.value = "" //trick:
+      //so if exact same file is selected twice,
+      //it will still trigger as change
+    }
+
+    reader.onerror = function (evt) {
+      alert("Loading failed.")
+    }
+
+    reader.readAsText(file, "UTF-8")
+
+  }

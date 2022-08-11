@@ -1,0 +1,62 @@
+
+
+
+
+set
+x = 2
+x = 2 + w
+x = "2"
+
+etc.
+
++ kollekte alle variablen und weise ihnen typen zu und initialisiere sie
++ eval kontrolle syntax
++ eval kontrolle nummern und variablen gemischt
++ naive kontrolle nach wohlformiertheit fängt mit x = an etc.
++ naive kontrolle nach $x werden hier number variablen und string variablen gemischt?
+
+
+if condition:
+warne (aber nur warnung), wenn anscheinend = statt == benutzt wird
+warne nicht bei gemischten typen, weil das zulässig ist (?)
+
+
+
+x = x + 3 / 6 * func(2000)
+
+funktionen unterstützen wir überhaupt nicht!
+
+das geht nicht!
+
+das müsste man über js machen, ich weiß, dass ink sie unterstützt, aber dann müssten
+wir auch generische unterrstützen etc., vergiss es
+
+wenn man funktionen reintut ist man selber schuld.
+
+x = x + 3 / a * b - $e ^ "1  23'32"
+
+segmentiert es.
+
+gibt warnung bei gemischten variablen aus
+
+gibt warnung falls if und =, warnung fall set und nicht mit x = anfängt und vieles mehr
+
+aber das ganze wird fundamental nur tokenisiert.
+
+dementsprechend könnte man auch alle variablen in ein objekt reinhauen, trivial
+
+strings unterstützen wird, aber nur mit "
+nicht mit ` und auch nicht mit ', da ink auch keine steings mit 'unterstützt!!!
+regex und kommentare unterstützen wir nicht
+aber wir unterstützen \", das wird von JS und ink unterstützt und muss korrekt getokenizt werden!
+
+
+function tokenize(str) {
+
+}
+
+
+
+
+
+
