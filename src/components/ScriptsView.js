@@ -75,35 +75,35 @@ function ScriptsView() {
     width: "60px"
   }
 
+  const unselectedTabStyle = `rounded bg-gray-200 cursor-pointer hover:bg-gray-700
+    hover:text-white ml-2
+    p-2`
+
+  const selectedTabStyle = `
+    rounded bg-blue-200
+    ml-2
+    p-2`
+
+
   return (
 <>
   <div className="ml-3">
     <div className="mt-3">
-      <button className="
-            rounded bg-gray-200 cursor-pointer hover:bg-gray-700
-            hover:text-white ml-2
-            p-2" onClick={() => setActiveTab(0)}>General</button>
+      <button className={activeTab === 0 ? selectedTabStyle : unselectedTabStyle}
+        onClick={() => setActiveTab(0)}>General</button>
 
-      <button className="
-            rounded bg-gray-200 cursor-pointer hover:bg-gray-700
-            hover:text-white ml-2
-            p-2" onClick={() => setActiveTab(1)}>Settings</button>
+      <button className={activeTab === 1 ? selectedTabStyle : unselectedTabStyle}
+       onClick={() => setActiveTab(1)}>Settings</button>
 
 
-      <button className="
-            rounded bg-gray-200 cursor-pointer hover:bg-gray-700
-            hover:text-white ml-2
-            p-2" onClick={() => setActiveTab(2)}>Localization</button>
+      <button className={activeTab === 2 ? selectedTabStyle : unselectedTabStyle}
+       onClick={() => setActiveTab(2)}>Localization</button>
 
-      <button className="
-            rounded bg-gray-200 cursor-pointer hover:bg-gray-700
-            hover:text-white ml-2
-            p-2" onClick={() => setActiveTab(3)}>HTML</button>
+      <button className={activeTab === 3 ? selectedTabStyle : unselectedTabStyle}
+       onClick={() => setActiveTab(3)}>HTML</button>
 
-      <button className="
-            rounded bg-gray-200 cursor-pointer hover:bg-gray-700
-            hover:text-white ml-2
-            p-2" onClick={() => setActiveTab(4)}>Status bar</button>
+      <button className={activeTab === 4 ? selectedTabStyle : unselectedTabStyle}
+       onClick={() => setActiveTab(4)}>Status bar</button>
 
 
     </div>
